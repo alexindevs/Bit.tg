@@ -29,8 +29,8 @@ export const getShortenRequest = async (userId: number): Promise<boolean> => {
     return false;
 }
 
-export const getOriginalUrl = async (userId: number, shortCode: string): Promise<string> => {
-    const url = await URLModel.findOne({ userId: userId, shortCode: shortCode });
+export const getOriginalUrl = async (shortCode: string): Promise<string> => {
+    const url = await URLModel.findOne({shortCode: shortCode });
     if (url) {
         return url.originalUrl;
     }
