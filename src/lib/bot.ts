@@ -66,6 +66,7 @@ bot.command("shorten", async (ctx) => {
 bot.on("message", async (ctx) => {
     const userId = ctx.from.id;
     const message = ctx.message;
+    console.log(message);
     if (await getShortenRequest(userId)) {
         const url = message.text;
 
@@ -88,6 +89,7 @@ bot.on("message", async (ctx) => {
 });
 
 bot.command("geturl", async (ctx) => {
+    console.log('geturl');
     if (!ctx.from) {
         await ctx.reply("Please share this bot with your Telegram account.");
         return;
@@ -107,6 +109,7 @@ bot.command("geturl", async (ctx) => {
 });
 
 bot.command("cancel", async (ctx) => {
+    console.log('cancel');
     if (!ctx.from) {
         await ctx.reply("Please share this bot with your Telegram account.");
         return;
@@ -117,6 +120,7 @@ bot.command("cancel", async (ctx) => {
 });
 
 bot.command("getmyurls", async (ctx) => {
+    console.log('getmyurls')
     if (!ctx.from) {
         await ctx.reply("Please share this bot with your Telegram account.");
         return;
