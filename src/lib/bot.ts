@@ -63,31 +63,6 @@ bot.command("shorten", async (ctx) => {
     await ctx.reply("Please provide the URL you want to shorten.");
 });
 
-bot.on("message", async (ctx) => {
-    const userId = ctx.from.id;
-    const message = ctx.message;
-    console.log(message);
-    if (await getShortenRequest(userId)) {
-        const url = message.text;
-
-        if (!url) {
-            await ctx.reply("Please provide a URL.");
-            return;
-        }
-
-        if (!isValidUrl(url)) {
-            await ctx.reply("Please provide a valid URL.");
-            return;
-        }
-
-        const shortenedUrl = shortenUrl(url, userId);
-
-        await ctx.reply(`Here's your shortened URL: ${shortenedUrl}`);
-
-        await deleteShortenRequest(userId);
-    }
-});
-
 bot.command("geturl", async (ctx) => {
     console.log('geturl');
     if (!ctx.from) {
@@ -140,6 +115,32 @@ bot.command("getmyurls", async (ctx) => {
         await ctx.reply(replyMessage, { parse_mode: "Markdown" });
     } else {
         await ctx.reply("You haven't shortened any URLs yet.");
+    }
+});
+
+
+bot.on("message", async (ctx) => {
+    const userId = ctx.from.id;
+    const message = ctx.message;
+    console.log(message);
+    if (await getShortenRequest(userId)) {
+        const url = message.text;
+
+        if (!url) {
+            await ctx.reply("Please provide a URL.");
+            return;
+        }
+
+        if (!isValidUrl(url)) {
+            await ctx.reply("Please provide a valid URL.");
+            return;
+        }
+
+        const shortenedUrl = shortenUrl(url, userId);
+
+        await ctx.reply(`Here's your shortened URL: ${shortenedUrl}`);
+
+        await deleteShortenRequest(userId);
     }
 });
 
