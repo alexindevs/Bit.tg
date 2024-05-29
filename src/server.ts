@@ -33,7 +33,7 @@ async function startBot() {
     bot.start();
     console.log('Bit.tg started');
 }
+startBot().catch(err => console.error(err));
 app.listen(3000, () => {
     console.log('Server started on port 3000');
-    startBot().catch(err => console.error(err));
 })
