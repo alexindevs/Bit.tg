@@ -75,7 +75,7 @@ bot.command("geturl", async (ctx) => {
     }
     const userId = ctx.from.id;
     console.log(ctx.message.text)
-    const url = await getOriginalUrl(ctx.message.text);
+    const url = await getOriginalUrl(ctx.message.text.split(' ')[1].trim());
     if (url) {
         await ctx.reply(`Original URL: ${url}`);
     } else {
