@@ -66,9 +66,6 @@ bot.command("shorten", async (ctx) => {
 bot.on("message", async (ctx) => {
     const userId = ctx.from.id;
     const message = ctx.message;
-
-    console.log(message);
-
     if (await getShortenRequest(userId)) {
         const url = message.text;
 
@@ -100,6 +97,7 @@ bot.command("geturl", async (ctx) => {
         return;
     }
     const userId = ctx.from.id;
+    console.log(ctx.message.text)
     const url = await getOriginalUrl(ctx.message.text);
     if (url) {
         await ctx.reply(`Original URL: ${url}`);
@@ -125,6 +123,7 @@ bot.command("getmyurls", async (ctx) => {
     }
     const userId = ctx.from.id;
     const urls = await getAllUrls(userId);
+    console.log(urls)
     if (urls.length > 0) {
         let replyMessage = "Here are your shortened URLs:\n\n";
         replyMessage += "| Original URL | Shortcode |\n";
