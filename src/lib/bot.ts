@@ -54,6 +54,8 @@ bot.on("message", async (ctx) => {
     const userId = ctx.from.id;
     const message = ctx.message;
 
+    console.log(message);
+
     if (await getShortenRequest(userId)) {
         const url = message.text;
 
