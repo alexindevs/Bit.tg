@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+app.get('/bot', (req, res) => {
+  res.redirect('https://t.me/BitTg_bot');
+});
+
 app.get('/:shortenedUrl', async (req, res) => {
   const shortenedUrl = req.params.shortenedUrl;
   const originalUrl = await getOriginalUrl(shortenedUrl);
@@ -21,10 +25,6 @@ app.get('/:shortenedUrl', async (req, res) => {
   } else {
     res.status(404).send('Shortened URL not found.');
   }
-});
-
-app.get('/bot', (req, res) => {
-  res.redirect('https://t.me/BitTg_bot');
 });
 
 async function startBot() {
