@@ -1,4 +1,4 @@
-import { Bot } from "grammy";
+import { Bot, HttpError, GrammyError } from "grammy";
 import { addShortenRequest, deleteShortenRequest, getAllUrls, getOriginalUrl, getShortenRequest, shortenUrl } from "./helper";
 
 const botToken = process.env.BOT_TOKEN;
@@ -20,6 +20,19 @@ bot.command("start", async (ctx) => {
     
     Ready to start shortening URLs effortlessly? Just send me any long URL, and I'll do the rest!`);
 });
+
+bot.catch((err) => {
+    const ctx = err.ctx;
+    console.error(`Error while handling update ${ctx.update.update_id}:`);
+    const e = err.error;
+    if (e instanceof GrammyError) {
+      console.error("Error in request:", e.description);
+    } else if (e instanceof HttpError) {
+      console.error("Could not contact Telegram:", e);
+    } else {
+      console.error("Unknown error:", e);
+    }
+  });  
 
 bot.hears('Tell me more about Alexin.', async (ctx) => {
     await ctx.reply(`
